@@ -18,5 +18,8 @@ app.get('/', function (req, res) {
 </html>');
 });
 
-app.listen(80);
-console.log('Running on http://localhost');
+var port = process.env.PORT || 3000;
+
+app.listen(port);
+
+console.log('Running on http://localhost:' + port);
