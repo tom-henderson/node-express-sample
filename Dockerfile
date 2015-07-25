@@ -5,6 +5,6 @@ WORKDIR /src
 
 RUN npm install
 
-EXPOSE 80
+ENV PORT=80
 
 CMD ["node", "index.js"]
