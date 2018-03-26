@@ -18,6 +18,14 @@ app.get('/', function (req, res) {
 </html>');
 });
 
+app.get('/health', function (req, res) {
+      res.format({
+      'text/plain': function(){
+        res.send('ok');
+      }
+    });
+});
+
 var port = process.env.PORT || 3000;
 
 app.listen(port);
