@@ -4,9 +4,11 @@ var os = require("os");
 var app = express();
 var hostname = os.hostname();
 
-app.use(express.static('public'));
+var base = process.env.BASE_PATH || '/';
 
-app.get('/health', function (req, res) {
+app.use(base, express.static('public'));
+
+app.get(base+'health', function (req, res) {
       res.format({
       'text/plain': function(){
         res.send('ok');
@@ -14,11 +16,11 @@ app.get('/health', function (req, res) {
     });
 });
 
-app.get('/*', function (req, res) {
+app.get(base+'*', function (req, res) {
   res.send('<html> \
     <head> \
         <title>Docker</title> \
-        <link rel="stylesheet" type="text/css" href="/css/style.css"> \
+        <link rel="stylesheet" type="text/css" href="' + base + 'css/style.css"> \
     </head> \
     <body> \
         <h1>Hello from ' + hostname + req.path + '</h1> \
@@ -30,4 +32,4 @@ var port = process.env.PORT || 3000;
 
 app.listen(port);
 
-console.log('Running on http://localhost:' + port);
+console.log('Running on http://localhost' +  base + ':' + port);
